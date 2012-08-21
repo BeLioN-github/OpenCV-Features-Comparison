@@ -45,6 +45,7 @@
 #include "agast5_8.h"
 #include <stdlib.h>
 #include <tmmintrin.h>
+#include <emmintrin.h>
 
 
 using namespace cv;

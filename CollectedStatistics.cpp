@@ -144,7 +144,7 @@ CollectedStatistics::OuterGroupLine CollectedStatistics::groupByTransformationTh
     return line;
 }
 
-std::ostream& CollectedStatistics::printStatistics(std::ostream& str, StatisticElement elem) const
+void CollectedStatistics::printStatistics(std::ostream& str, StatisticElement elem)
 {
     CollectedStatistics::OuterGroupLine report = groupByTransformationThenByAlgorithm();
 
@@ -177,10 +177,10 @@ std::ostream& CollectedStatistics::printStatistics(std::ostream& str, StatisticE
         }
     }
 
-    return str << std::endl;
+    str << std::endl;
 }
 
-std::ostream& CollectedStatistics::printPerformanceStatistics(std::ostream& str) const
+void CollectedStatistics::printPerformanceStatistics(std::ostream& str)
 {
     str << quote("Performance")               << std::endl;
     str << quote("Algorithm")                 << tab
@@ -215,5 +215,5 @@ std::ostream& CollectedStatistics::printPerformanceStatistics(std::ostream& str)
             << avgPerKeyPoint    << std::endl;
     }
 
-    return str << std::endl;
+    str << std::endl;
 }

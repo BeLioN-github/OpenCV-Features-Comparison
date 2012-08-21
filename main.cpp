@@ -8,15 +8,16 @@
 #include <algorithm>
 #include <numeric>
 #include <fstream>
+#include <iostream>
+#include <vector>
 
-
-const bool USE_VERBOSE_TRANSFORMATIONS = false;
+const bool USE_VERBOSE_TRANSFORMATIONS = true;
 
 int main(int argc, const char* argv[])
 {
     // Print OpenCV build info:
     std::cout << cv::getBuildInformation() << std::endl;
-    return 0;
+
     std::vector<FeatureAlgorithm>              algorithms;
     std::vector<cv::Ptr<ImageTransformation> > transformations;
 
@@ -42,7 +43,7 @@ int main(int argc, const char* argv[])
         new cv::SurfFeatureDetector(),
         new cv::FREAK(),
         new cv::BFMatcher(cv::NORM_HAMMING, useCrossCheck)));
-    
+
     algorithms.push_back(FeatureAlgorithm("ORB3/ORB3/BF",
         new cv::ORB(500, 1.2f, 8,31, 0, 3),
         new cv::ORB(500, 1.2f, 8,31, 0, 3),
@@ -124,11 +125,16 @@ int main(int argc, const char* argv[])
             std::cout << "done." << std::endl;
         }
 
-        fullStat.printPerformanceStatistics(std::ofstream("Performance.txt"));
-        fullStat.printStatistics(std::ofstream("MatchingRatio.txt"),           StatisticsElementMatchingRatio);
-        fullStat.printStatistics(std::ofstream("PercentOfMatches.txt"),        StatisticsElementPercentOfMatches);
-        fullStat.printStatistics(std::ofstream("PercentOfCorrectMatches.txt"), StatisticsElementPercentOfCorrectMatches);
-        fullStat.printStatistics(std::ofstream("MeanDistance.txt"),            StatisticsElementMeanDistance);
+        std::ofstream performance("Performance.csv");
+        fullStat.printPerformanceStatistics(performance);
+        std::ofstream matchingRatio("MatchingRatio.csv");
+        fullStat.printStatistics(matchingRatio,StatisticsElementMatchingRatio);
+        std::ofstream percentOfMatches("PercentOfMatches.csv");
+        fullStat.printStatistics(percentOfMatches,StatisticsElementPercentOfMatches);
+        std::ofstream percentOfCorrectMatches("PercentOfCorrectMatches.csv");
+        fullStat.printStatistics(percentOfCorrectMatches,StatisticsElementPercentOfCorrectMatches);
+        std::ofstream meanDistance("MeanDistance.csv");
+        fullStat.printStatistics(meanDistance,StatisticsElementMeanDistance);
     }
 
     return 0;
