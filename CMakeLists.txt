@@ -7,6 +7,9 @@ include_directories(${OpenCV_INCLUDE_DIR})
 
 link_directories(${OpenCV_LIBRARY_DIR})
 
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mssse3")
+
 add_subdirectory(agast)
 include_directories("${CMAKE_SOURCE_DIR}/agast")
 
