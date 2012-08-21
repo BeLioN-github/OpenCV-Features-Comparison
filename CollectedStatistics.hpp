@@ -62,8 +62,8 @@ public:
     OuterGroup groupByAlgorithmThenByTransformation() const;
     OuterGroupLine groupByTransformationThenByAlgorithm() const;
 
-    std::ostream& printPerformanceStatistics(std::ostream& str) const;
-    std::ostream& printStatistics(std::ostream& str, StatisticElement elem) const;
+    void printPerformanceStatistics(std::ostream& str);
+    void printStatistics(std::ostream& str, StatisticElement elem) ;
 
 private:
     typedef std::pair<std::string, std::string> Key;
